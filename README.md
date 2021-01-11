@@ -1,5 +1,3 @@
-2020/1/11 に動作確認したバージョン。Dockerfileを書き換えた。
-
 Growing Object Oriented Software, Guided by Tests (GOOS) is a well known and respected book focusing on the design feedback provided by Test Driving software development. As discussed at [insert link], this is my first attempt at the comprehensive worked example - the Auction Sniper. Whilst the final solution is of interest, perhaps of even more value is reviewing the commit history to see how I journey from an initial failing end to end test to a working solution which communicates to remote servers, presents a Swing UI and does so with low coupling / high cohension.
 
 
