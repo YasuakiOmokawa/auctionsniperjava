@@ -1,9 +1,11 @@
-Growing Object Oriented Software, Guided by Tests (GOOS) is a well known and respected book focusing on the design feedback provided by Test Driving software development. As discussed at [insert link], this is my first attempt at the comprehensive worked example - the Auction Sniper. Whilst the final solution is of interest, perhaps of even more value is reviewing the commit history to see how I journey from an initial failing end to end test to a working solution which communicates to remote servers, presents a Swing UI and does so with low coupling / high cohension.  
+2020/1/11 に動作確認したバージョン。Dockerfileを書き換えた。
+
+Growing Object Oriented Software, Guided by Tests (GOOS) is a well known and respected book focusing on the design feedback provided by Test Driving software development. As discussed at [insert link], this is my first attempt at the comprehensive worked example - the Auction Sniper. Whilst the final solution is of interest, perhaps of even more value is reviewing the commit history to see how I journey from an initial failing end to end test to a working solution which communicates to remote servers, presents a Swing UI and does so with low coupling / high cohension.
 
 
 # Installation
 
-This, my solution to the Auction Sniper worked example primarily consists of a Java source tree, with dependency and build implemnted using idiomatic Maven. The test and integration-test phases cover the unit testing, and end to end testing requirements of the worked example.  
+This, my solution to the Auction Sniper worked example primarily consists of a Java source tree, with dependency and build implemnted using idiomatic Maven. The test and integration-test phases cover the unit testing, and end to end testing requirements of the worked example.
 
 The Auction Sniper solution requires an XMPP server, so I've bundled a Vines instance in the poorly named vagrant submodule, as a Docker container to simplify deployment, and enable Continous Integration on CircleCi
 
@@ -22,12 +24,12 @@ The Auction Sniper solution requires an XMPP server, so I've bundled a Vines ins
 Build the Vines XMPP server Docker image by
 
     docker build -t 'paulswilliams/vines' vagrant/
-    
+
 Once complete, run the Docker image
 
-    docker run -p 5222:5222 -t 'paulswilliams/vines'
+    docker run -d -p 5222:5222 -t 'paulswilliams/vines'
 
-If deploying on a Mac with Boot2Docker, in a seperate terminal window, create an ssh tunnel to enable native to Docker VM communication  
+If deploying on a Mac with Boot2Docker, in a seperate terminal window, create an ssh tunnel to enable native to Docker VM communication
 
     boot2docker ssh -L 5222:localhost:5222
 
@@ -39,7 +41,7 @@ To enable the Smack XMPP client to communicate with Vines, it is essential to do
 
 Import certificate into expected local keystore
 
-    keytool -import -alias localhost -file certificates/localhost.crt  -keystore certificates/akeystore.jks 
+    keytool -import -alias localhost -file certificates/localhost.crt  -keystore certificates/akeystore.jks
 
 And select a password
 
@@ -49,9 +51,9 @@ And select a password
 
 # Cleanup
 
-To remove the worked example from your machine, stop and delete the Vines Docker container, and then delete the git clone. 
+To remove the worked example from your machine, stop and delete the Vines Docker container, and then delete the git clone.
 
-## Stop and Delete the Vines Docker container 
+## Stop and Delete the Vines Docker container
 
 Stop the Docker container
 
@@ -59,7 +61,7 @@ Stop the Docker container
 
 Delete the Docker container
 
-    docker rmi 'paulswilliams/vines' 
+    docker rmi 'paulswilliams/vines'
 
 # Challenges
 
@@ -71,7 +73,7 @@ Delete the Docker container
 ### Mockito not strict mock...
 
 # Key lessons
- 
+
 ## anonymous classes are okay in the short term. Keep them inline until you understand sufficiently to refactor them out - remember the inline before refactor technique?
 
 ## Learning is key, not the code. That's why I deleted it all!!
@@ -86,7 +88,7 @@ Delete the Docker container
 
     verify(auction, times(1)).bid(price + increment);
     verify(sniperListener, atLeastOnce()).sniperBidding();
-    
+
 ###
 However, JMock has default strict mocks, so they're not that loose. Yes, allowances / when / then helps, but enough?
 
