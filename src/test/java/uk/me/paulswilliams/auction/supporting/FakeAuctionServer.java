@@ -31,7 +31,8 @@ public class FakeAuctionServer {
 
     public FakeAuctionServer(String itemId) {
         this.itemId = itemId;
-        ConnectionConfiguration connectionConfig = new ConnectionConfiguration(XMPP_HOSTNAME, 5222);
+        ConnectionConfiguration connectionConfig = new ConnectionConfiguration(
+          XMPP_HOSTNAME, 5222);
         connectionConfig.setSecurityMode(ConnectionConfiguration.SecurityMode.required);
         System.setProperty("javax.net.ssl.trustStore", "certificates/akeystore.jks");
         this.connection = new XMPPTCPConnection(connectionConfig);
