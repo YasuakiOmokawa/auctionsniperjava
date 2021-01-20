@@ -21,7 +21,7 @@ public class MainWindowTest {
     @Test
     public void makesUserRequestWhenJoinButtonClicked() {
         final ValueMatcherProbe<Item> itemProbe
-                = new ValueMatcherProbe<Item>(equalTo(new Item("an item-id", 789)), "item request");
+          = new ValueMatcherProbe<Item>(equalTo(new Item("an item-id", 7890)), "item request");
         mainWindow.addUserRequestListener(
                 new UserRequestListener() {
                     public void joinAuction(Item item) {
@@ -29,7 +29,7 @@ public class MainWindowTest {
                     }
                 });
 
-        driver.startBiddingFor("an item-id", 789 );
+        driver.startBiddingFor("an item-id", 7890 );
         driver.check(itemProbe);
     }
 
